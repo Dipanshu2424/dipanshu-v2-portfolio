@@ -102,6 +102,25 @@
                 transform: translateY(0) scale(1);
             }
         }
+        
+        /* --- NEW KEYFRAME FOR H2 ICON ANIMATION (Pulsing Glow) --- */
+        @keyframes h2-icon-scan {
+            0% { 
+                text-shadow: 0 0 0 rgba(0, 169, 255, 0); 
+                transform: scale(1); 
+                color: var(--primary-accent);
+            }
+            50% { 
+                text-shadow: 0 0 15px var(--blue-primary-glow); 
+                transform: scale(1.1); 
+                color: var(--blue-primary-glow);
+            }
+            100% { 
+                text-shadow: 0 0 0 rgba(0, 169, 255, 0); 
+                transform: scale(1); 
+                color: var(--primary-accent);
+            }
+        }
 
         /* --- SCROLL ANIMATION STYLES (NEW) --- */
         .scroll-fade-item {
@@ -114,6 +133,12 @@
         .scroll-fade-item.scrolled-in {
             opacity: 1;
             transform: translateY(0);
+        }
+        
+        /* Apply H2 Icon animation when the parent section scrolls in */
+        .scroll-fade-item.scrolled-in h2 i {
+            /* 0.6s delay ensures animation starts after the element fades in */
+            animation: h2-icon-scan 3s ease-in-out 0.6s infinite alternate; 
         }
 
         /* --- GLOBAL & BODY STYLES --- */
@@ -203,12 +228,27 @@
         /* --- NAVIGATION STYLES --- */
         .top-nav {
             position: relative; 
-            top: 0; 
-            right: 0;
             width: 100%;
             margin-bottom: 30px;
             text-align: center;
         }
+        /* Style for the hamburger icon container (Hidden on Desktop) */
+        .nav-toggle {
+            display: none; 
+            cursor: pointer;
+            text-align: right;
+            padding-right: 15px;
+            margin-bottom: 15px;
+        }
+        .nav-toggle i {
+            font-size: 1.5em;
+            color: var(--primary-accent);
+            transition: color 0.3s;
+        }
+        .nav-toggle i:hover {
+            color: var(--blue-secondary-accent);
+        }
+        
         .top-nav ul {
             list-style: none;
             padding: 0;
@@ -332,7 +372,7 @@
             border-right: 0.15em solid var(--blue-primary-glow);
         }
 
-        /* NEW: Dedicated animation for the About Me Logo */
+        /* NEW: Dedicated animation for the About Me Logo (Already pulsing) */
         .about-logo-anim {
             animation: logo-pulse 3s infinite alternate; 
         }
@@ -639,7 +679,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- RESPONSIVENESS --- */
+        /* --- RESPONSIVENESS (MOBILE) --- */
         @media screen and (max-width: 768px) {
 
             .main-container {
@@ -648,13 +688,14 @@
                 margin: 10px auto;
             }
 
+            /* 1. REDUCED H1 FONT SIZE (Further Reduced to 2.0em) */
             h1 {
-                font-size: 2.5em;
+                font-size: 2.0em; 
                 padding-top: 0;
             }
             
             h2 {
-                text-align: center; /* Keep the main Portfolio subtitle centered on mobile too */
+                text-align: center; 
             }
 
             .inspirational-quote {
@@ -667,18 +708,74 @@
                 margin-bottom: 30px;
             }
 
-            /* *** CRITICAL FIX START *** */
+            /* --- HAMBURGER MENU STYLES (Top Left Alignment) --- */
+            .nav-toggle {
+                display: block; /* Show hamburger icon */
+                text-align: left; /* Align to left */
+                padding: 10px 0 0 10px; /* Aligned to top left */
+                margin-top: -5px; 
+                margin-bottom: 0;
+                position: relative; /* Keep it in flow */
+                width: auto;
+            }
+            
+            .top-nav {
+                margin-top: 10px;
+                margin-bottom: 0; 
+                text-align: left; /* Ensure the top nav itself doesn't force center alignment */
+            }
+
+            .top-nav ul {
+                flex-direction: column; /* Stack links vertically */
+                justify-content: flex-start;
+                align-items: center;
+                
+                /* Position and style for slide-out menu */
+                position: absolute; 
+                width: 70%; /* Give it a fixed width */
+                left: 10px; /* Start from the left, below the toggle */
+                top: 45px; /* Position below the hamburger icon */
+                background-color: var(--container-bg); 
+                box-shadow: 5px 5px 15px rgba(0, 169, 255, 0.4);
+                z-index: 10;
+                border-radius: 5px;
+                padding-top: 5px;
+                
+                /* Initially hide the menu */
+                height: 0;
+                overflow: hidden;
+                opacity: 0;
+                border-bottom: none;
+                transition: height 0.3s ease-out, opacity 0.3s ease-out, padding 0.3s;
+            }
+            
+            .top-nav ul.open {
+                /* When open, show the menu */
+                height: 350px; /* Adjust this value based on number of links */
+                opacity: 1;
+                padding-bottom: 15px;
+                border-bottom: 1px dashed rgba(0, 169, 255, 0.2); 
+            }
+
+            .top-nav li {
+                width: 90%; /* Links take up most of the menu width */
+                margin: 5px auto; 
+            }
+            .top-nav a {
+                display: block; 
+            }
+            
+            /* --- CONTACT LOGO FIX (Preserved as requested) --- */
             .contact-logo {
-                flex-wrap: nowrap; /* FIX: Prevents icons from wrapping to a second line */
-                justify-content: space-around; /* Spreads the three items out evenly */
+                flex-wrap: nowrap; 
+                justify-content: space-around; 
                 margin: 20px 0 0 0;
-                overflow-x: auto; /* Adds horizontal scrolling if needed for tiny screens */
+                overflow-x: auto; 
             }
             .contact-logo .contact-item {
-                flex-shrink: 0; /* Prevents items from squishing too much */
-                margin: 0 5px; /* Use smaller side margin to save horizontal space */
+                flex-shrink: 0; 
+                margin: 0 5px; 
             }
-            /* *** CRITICAL FIX END *** */
 
             .contact-logo a {
                 font-size: 2.5em;
@@ -690,23 +787,6 @@
                 width: 100%;
             }
 
-            .top-nav {
-                margin-top: 10px;
-            }
-
-            .top-nav ul {
-                padding-top: 10px;
-                justify-content: center;
-                overflow-x: auto;
-                padding-bottom: 5px;
-            }
-
-            .top-nav li {
-                flex-shrink: 0;
-                /* Reduced margin for better fit */
-                margin: 5px; 
-            }
-            
             /* Ensure the left border accent works on mobile paragraphs */
             .main-container p {
                 padding-left: 10px;
@@ -791,6 +871,12 @@
             });
         }
 
+        // --- NEW HAMBURGER MENU TOGGLE FUNCTION ---
+        function toggleMenu() {
+            const navList = document.getElementById('navList');
+            navList.classList.toggle('open');
+        }
+
 
         // Attach event listener after the page loads
         document.addEventListener('DOMContentLoaded', () => {
@@ -798,6 +884,26 @@
             if (form) {
                 form.addEventListener('submit', handleFormSubmit);
             }
+            
+            // Event listener for hamburger toggle
+            const navToggle = document.getElementById('navToggle');
+            if (navToggle) {
+                navToggle.addEventListener('click', toggleMenu);
+            }
+
+            // Close menu when a link is clicked (mobile experience)
+            const navList = document.getElementById('navList');
+            const navLinks = navList ? navList.querySelectorAll('a[href^="#"]') : [];
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Check if menu is open before trying to close it
+                    if (navList && navList.classList.contains('open')) {
+                        navList.classList.remove('open');
+                    }
+                });
+            });
+
             // Initialize skill stagger animation
             staggerSkills(); 
             // Initialize scroll animation
@@ -812,7 +918,11 @@
     <div class="main-container">
 
         <nav class="top-nav">
-            <ul>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <ul id="navList">
                 <li><a href="#about">About Me</a></li>
                 <li><a href="#courses">Courses</a></li>
                 <li><a href="#skills">Skills</a></li>
