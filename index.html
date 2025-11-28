@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dipanshu Mukherjee Portfolio</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Define color variables for easy changes */
+        :root {
+            /* ELECTRIC BLUE PRIMARY COLOR (Used for most elements) */
+            --primary-accent: #00A9FF; /* Electric Blue */ 
+            --background-dark: #000000;
+            --container-bg: #030303;
+            --text-light: #e0e0e0;
+            /* FONT VARIABLE */
+            --font-primary: 'Roboto Mono', 'Consolas', monospace; 
+            
+            /* Electric Blue Glow Variables */
+            --blue-primary-glow: #00A9FF; 
+            --blue-secondary-accent: #33BFFF; /* Lighter blue for subtler accents/hovers */
+
+            /* ORANGE VARIABLE FOR QUOTE */
+            --orange-accent: #ffa500; /* Bright Orange */ 
+            
+            /* GREEN VARIABLE FOR CONTACT ICONS */
+            --contact-green: #39ff14; /* Neon Green */
+        }
+        
+        /* Keyframe for the ELECTRIC BLUE glow (Container/Profile) */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px var(--blue-primary-glow), 0 0 30px rgba(0, 169, 255, 0.4); }
+            50% { box-shadow: 0 0 25px var(--blue-primary-glow), 0 0 50px rgba(0, 169, 255, 0.6); }
+            100% { box-shadow: 0 0 15px var(--blue-primary-glow), 0 0 30px rgba(0, 169, 255, 0.4); }
+        }
+        
+        /* Keyframe for the ORANGE quote glow */
+        @keyframes quote-orange-glow {
+            0% { 
+                box-shadow: 0 0 15px var(--orange-accent), 0 0 30px rgba(255, 165, 0, 0.4); 
+                text-shadow: 0 0 5px var(--orange-accent), 0 0 10px rgba(255, 165, 0, 0.5);
+            }
+            50% { 
+                box-shadow: 0 0 25px var(--orange-accent), 0 0 50px rgba(255, 165, 0, 0.6); 
+                text-shadow: 0 0 8px var(--orange-accent), 0 0 15px rgba(255, 165, 0, 0.7);
+            }
+            100% { 
+                box-shadow: 0 0 15px var(--orange-accent), 0 0 30px rgba(255, 165, 0, 0.4); 
+                text-shadow: 0 0 5px var(--orange-accent), 0 0 10px rgba(255, 165, 0, 0.5);
+            }
+        }
+        
+        /* KEYFRAMES FOR THE TYPING EFFECT ON H1 & H2 */
+        @keyframes type-out {
+            /* Now that H1 is inside a tight container, animating width to 100% works smoothly */
+            from { width: 0 }
+            to { width: 100% } 
+        }
+
+        /* Define the blinking cursor (ELECTRIC BLUE) */
+        @keyframes blink-cursor {
+            from, to { border-color: transparent }
+            50% { border-color: var(--blue-primary-glow); } 
+        }
+
+        /* Electric Blue Waving Glow (Applied to the new container) */
+        @keyframes name-wave-glow-blue {
+            0% { 
+                text-shadow: 
+                    0 0 5px var(--blue-primary-glow),
+                    0 0 10px rgba(0, 169, 255, 0.7);
+                box-shadow: 0 0 10px var(--blue-primary-glow);
+            }
+            66% { 
+                text-shadow: 
+                    0 0 15px var(--blue-primary-glow),
+                    0 0 25px rgba(0, 169, 255, 0.8),
+                    0 0 40px rgba(0, 169, 255, 0.6);
+                box-shadow: 0 0 20px var(--blue-primary-glow);
+            }
+            100% { 
+                text-shadow: 
+                    0 0 5px var(--blue-primary-glow),
+                    0 0 10px rgba(0, 169, 255, 0.7);
+                box-shadow: 0 0 10px var(--blue-primary-glow);
+            }
+        }
+        
+        /* Keyframe for About Me Logo Pulse Animation */
+        @keyframes logo-pulse {
+            0% { transform: scale(1.0); text-shadow: 0 0 5px var(--blue-primary-glow); }
+            50% { transform: scale(1.1); text-shadow: 0 0 15px var(--blue-primary-glow), 0 0 30px rgba(0, 169, 255, 0.7); }
+            100% { transform: scale(1.0); text-shadow: 0 0 5px var(--blue-primary-glow); }
+        }
+        
+        /* Keyframe for the glowing menu item text and box (ENHANCED GLOW) */
+        @keyframes menu-item-glow {
+            0% { 
+                text-shadow: 0 0 7px var(--blue-primary-glow); /* Increased */
+                box-shadow: 0 0 7px rgba(0, 169, 255, 0.4); /* Increased */
+            }
+            50% { 
+                text-shadow: 0 0 20px var(--blue-primary-glow), 0 0 40px rgba(0, 169, 255, 0.9); /* Increased spread/intensity */
+                box-shadow: 0 0 25px rgba(0, 169, 255, 0.8); /* Increased */
+            }
+            100% { 
+                text-shadow: 0 0 7px var(--blue-primary-glow); 
+                box-shadow: 0 0 7px rgba(0, 169, 255, 0.4);
+            }
+        }
+        
+        /* Keyframes for the skill tag entry animation */
+        @keyframes skill-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* --- KEYFRAME FOR H2 ICON ANIMATION (Pulsing Glow) --- */
+        @keyframes h2-icon-scan {
+            0% { 
+                text-shadow: 0 0 0 rgba(0, 169, 255, 0); 
+                transform: scale(1); 
+                color: var(--primary-accent);
+            }
+            50% { 
+                text-shadow: 0 0 15px var(--blue-primary-glow); 
+                transform: scale(1.1); 
+                color: var(--blue-primary-glow);
+            }
+            100% { 
+                text-shadow: 0 0 0 rgba(0, 169, 255, 0); 
+                transform: scale(1); 
+                color: var(--primary-accent);
+            }
+        }
+
+        /* --- SCROLL ANIMATION STYLES (NEW) --- */
+        .scroll-fade-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .scroll-fade-item.scrolled-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Apply H2 Icon animation when the parent section scrolls in */
+        .scroll-fade-item.scrolled-in h2 i:not(.about-logo-anim) {
+            /* 0.6s delay ensures animation starts after the element fades in */
+            animation: h2-icon-scan 3s ease-in-out 0.6s infinite alternate; 
+        }
+
+        /* --- GLOBAL & BODY STYLES --- */
+        
+        html {
+            /* FIX: Set the base color here to prevent white space at the top/bottom */
+            background-color: var(--background-dark);
+            /* Ensure it fills the entire viewport height */
+            min-height: 100vh; 
+            /* Kept smooth scrolling for internal links */
+            scroll-behavior: smooth;
+        }
+
+        .parallax-bg {
+            background-color: var(--background-dark); 
+            /* LOCAL FILE PATH FOR BACKGROUND IMAGE */
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center center; 
+            background-attachment: fixed;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            /* Keeps the background subtle */
+            opacity: 0.15; 
+        }
+        
+        body {
+            /* FIX: Must be transparent to let parallax-bg show through */
+            background-color: transparent;
+            font-family: var(--font-primary); 
+            /* Remove default margin to eliminate white space */
+            margin: 0; 
+        }
+
+        .main-container {
+            font-family: var(--font-primary); 
+            margin: 60px auto;
+            padding: 50px;
+            color: var(--text-light);
+            max-width: 900px;
+            border-radius: 8px;
+            /* Container Glow */
+            box-shadow: 0 0 30px rgba(0, 169, 255, 0.5); 
+            background: var(--container-bg);
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            /* Applied subtle pulse glow to the container */
+            animation: pulse-glow 5s infinite alternate; 
+        }
+        
+        /* NEW STYLE for section outline box (Applied to all content sections) */
+        .section-content-box {
+            /* Subtle Electric Blue Border */
+            border: 1px solid var(--blue-secondary-accent); 
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 20px;
+            /* Very slight blue background for depth */
+            background-color: rgba(0, 169, 255, 0.03); 
+            /* Subtle glow */
+            box-shadow: 0 0 5px rgba(0, 169, 255, 0.1);
+            transition: box-shadow 0.3s, border-color 0.3s;
+            margin-bottom: 40px; /* Add space below the box */
+        }
+
+        /* Hover effect for a more intense glow */
+        .section-content-box:hover {
+            box-shadow: 0 0 10px rgba(0, 169, 255, 0.3);
+            border-color: var(--primary-accent);
+        }
+        
+        /* Remove margin from the first element inside the box for clean padding */
+        .section-content-box > *:first-child {
+            margin-top: 0 !important; 
+        }
+
+        /* LEFT BORDER ACCENT TO PARAGRAPHS */
+        .main-container p {
+            padding: 5px 0 5px 15px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            border-left: 2px solid rgba(0, 169, 255, 0.2); 
+            transition: border-left-color 0.3s;
+        }
+        .main-container p:hover {
+            border-left-color: var(--primary-accent);
+        }
+
+
+        /* --- NAVIGATION STYLES (ADJUSTED) --- */
+        .top-nav {
+            /* NEW ABSOLUTE POSITIONING TO PUT IT NEAR PROFILE PIC (Top is ~350px down) */
+            position: absolute; 
+            left: 20px; /* Inside the main-container padding */
+            top: 350px; /* Adjusted to be near the profile picture area on Desktop */
+            width: 250px; /* Give it a fixed width to contain the menu */
+            text-align: left;
+            z-index: 100; 
+        }
+        
+        /* Hamburger icon container: Now RELATIVE to top-nav */
+        .nav-toggle {
+            display: block; 
+            cursor: pointer;
+            text-align: left; 
+            position: relative; /* Changed from absolute */
+            left: 0; 
+            top: 0; 
+            width: auto;
+            padding: 10px; 
+            transition: all 0.3s;
+        }
+        .nav-toggle i {
+            font-size: 1.5em;
+            /* MENU ICON COLOR SET TO ELECTRIC BLUE */
+            color: var(--primary-accent); 
+            transition: color 0.3s;
+        }
+        .nav-toggle i:hover {
+            color: var(--blue-secondary-accent);
+        }
+        
+        /* Navigation list */
+        .top-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            
+            display: none; 
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            
+            position: absolute; /* Relative to .top-nav */
+            left: 0; 
+            top: 100%; /* Positioned directly below the .nav-toggle */
+            transform: none; 
+            width: 100%; /* Take the width of the parent .top-nav */
+            max-width: 300px;
+            background-color: var(--container-bg);
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 169, 255, 0.4);
+            z-index: 90;
+            
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, padding 0.4s;
+        }
+        
+        /* Open state for the menu (Vertical list enforced) */
+        .top-nav ul.open {
+            display: flex; 
+            flex-direction: column; /* Forces vertical list */
+            justify-content: flex-start;
+            align-items: flex-start; 
+            
+            max-height: 400px; 
+            opacity: 1;
+            padding: 10px 0 15px 0;
+            border-bottom: 1px dashed rgba(0, 169, 255, 0.2); 
+        }
+        
+        .top-nav li {
+            width: 90%; 
+            margin: 5px 15px; /* Added left margin for a cleaner list */
+        }
+        .top-nav a {
+            text-decoration: none;
+            /* Default link appearance in the open menu */
+            color: var(--primary-accent); 
+            font-size: 0.85em;
+            padding: 6px 10px;
+            border-radius: 20px;
+            transition: all 0.4s ease-in-out;
+            text-transform: uppercase;
+            border: 1px solid var(--primary-accent); 
+            background-color: rgba(0, 169, 255, 0.1); 
+            box-shadow: 0 0 5px rgba(0, 169, 255, 0.3);
+            font-weight: 700;
+            display: block;
+        }
+        
+        /* Apply enhanced glowing animation to links when menu is open */
+        .top-nav ul.open a {
+            animation: menu-item-glow 3s infinite alternate;
+        }
+
+        .top-nav a:hover {
+            color: var(--text-light); /* Text color changes on hover for contrast */
+            border: 1px solid var(--primary-accent);
+            background-color: rgba(0, 169, 255, 0.3); 
+            box-shadow: 0 0 20px var(--primary-accent);
+            transform: translateY(-2px);
+            /* Override text glow animation on hover for a stronger effect */
+            text-shadow: 0 0 15px var(--primary-accent), 0 0 30px rgba(0, 169, 255, 0.8);
+            animation-play-state: paused;
+        }
+
+        /* --- HEADER & PROFILE STYLES --- */
+        .profile-image-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--primary-accent); 
+            box-shadow: 0 0 15px var(--primary-accent), 0 0 30px rgba(0, 169, 255, 0.4); 
+            transition: transform 0.3s ease-in-out;
+        }
+        .profile-image:hover {
+            transform: scale(1.05) rotate(1deg);
+        }
+        
+        /* NEW: Container for the H1 and its tight box (handles centering and box styling) */
+        .name-box-container {
+            text-align: center; 
+            /* Crucial: Allows the container to shrink-wrap the h1 content's width */
+            display: block;
+            width: max-content; 
+            margin: 0 auto 5px auto; /* Centers the whole container block */
+            
+            /* Tight Box Styles (Moved from h1) */
+            padding: 5px 15px; 
+            border: 3px solid var(--blue-primary-glow); 
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 169, 255, 0.8); 
+
+            /* Applied glow animation to the stable box container */
+            animation: name-wave-glow-blue 4s infinite alternate 6s;
+        }
+
+
+        /* H1 STYLE - Now ONLY for Typing Animation and Text appearance */
+        h1 {
+            /* Text appearance */
+            font-size: 4em;
+            color: var(--blue-primary-glow); 
+            text-transform: uppercase;
+            
+            /* Typing Animation Properties (Kept) */
+            overflow: hidden; 
+            white-space: nowrap; 
+            width: 0; 
+            
+            /* Reset layout properties (now handled by container) */
+            text-align: left; /* Keep text left aligned inside its own overflow context */
+            margin: 0; 
+            padding: 0;
+            padding-top: 0;
+            border: none; /* Crucial: Remove border from the animating element */
+            box-shadow: none; /* Crucial: Remove shadow from the animating element */
+            
+            /* Animation: (6s is the typing duration) */
+            animation: 
+                type-out 6s steps(20) forwards, 
+                blink-cursor 0.75s step-end infinite alternate 6s;
+                
+            /* Cursor Simulation */
+            border-right: 0.15em solid var(--blue-primary-glow); 
+        }
+        
+        /* NEW STYLE for the line below H1 (FULL WIDTH) */
+        .name-separator {
+            width: 100%; /* Made full width */
+            max-width: 100%;
+            height: 1px;
+            background: var(--blue-primary-glow);
+            /* 5px above, centered, 10px below (before h2) */
+            margin: 5px auto 10px; 
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--blue-primary-glow);
+            /* Reuse name glow animation */
+            animation: name-wave-glow-blue 4s infinite alternate; 
+        }
+
+        /* New class to remove the cursor after the animation is done (to ensure it stops on all browsers) */
+        .cursor-off {
+            border-right: none !important;
+        }
+        
+        h2 {
+            /* Centering the Portfolio subtitle */
+            text-align: center; 
+            color: var(--primary-accent);
+            border-bottom: none; 
+            padding-bottom: 0; 
+            /* Reduced margin-top for the subtitle directly below the separator */
+            margin-top: 10px; 
+            margin-bottom: 10px; 
+            font-size: 1.5em;
+            text-transform: uppercase;
+            padding-top: 0; /* Removed padding-top */
+        }
+        
+        h2 i {
+            color: var(--primary-accent);
+            text-shadow: 0 0 3px var(--primary-accent);
+            margin-right: 10px;
+            vertical-align: middle; /* Vertical alignment for icon/text coherence */
+            transition: transform 0.3s, text-shadow 0.3s;
+        }
+        
+        /* NEW: Style for About Me Typing Text Container */
+        .typing-container {
+            display: inline-flex; /* Use flex to align icon and text */
+            align-items: center;
+        }
+
+        /* NEW: Style for About Me Typing Text */
+        .typing-text {
+            display: inline-block;
+            overflow: visible; /* CHANGE 1: Allow text to show immediately */
+            white-space: nowrap; 
+            width: auto; /* CHANGE 1: Allow text to take its natural width */
+            margin-left: 10px; /* Space between icon and text */
+            
+            /* CHANGE 1: REMOVE TYPING AND CURSOR ANIMATIONS */
+            animation: none; 
+            border-right: none; 
+        }
+
+        /* NEW: Dedicated animation for the About Me Logo (Already pulsing) */
+        .about-logo-anim {
+            animation: logo-pulse 3s infinite alternate; 
+        }
+        
+        /* OVERRIDE FOR SUBSEQUENT HEADINGS TO KEEP THEM LEFT-ALIGNED (Better UX) */
+        h2#about, h2#courses, h2#skills, h2#education, h2#experience, h2#projects, h2#hire-me, h2#resume, h2#contact {
+             text-align: left;
+             /* Restore the large top margin for section headers */
+             margin-top: 60px;
+             padding-top: 10px;
+        }
+        
+        /* Ensure H2 for About Me can align its content */
+        h2#about {
+            display: flex;
+            align-items: center;
+            /* CHANGE 2: ALIGN TO THE LEFT */
+            justify-content: flex-start;
+        }
+
+
+        /* --- THOUGHT BUBBLE QUOTE STYLE (ORANGE GLOWING) */
+        .inspirational-quote {
+            text-align: center;
+            margin: 20px auto 40px;
+            padding: 20px;
+            max-width: 80%;
+            font-family: var(--font-primary); 
+            font-size: 1.1em; 
+            position: relative;
+            background-color: rgba(255, 165, 0, 0.05); 
+            border-radius: 15px;
+            border: 2px solid var(--orange-accent);
+            animation: quote-orange-glow 2.5s infinite alternate; 
+        }
+        .inspirational-quote::after {
+            content: '';
+            position: absolute;
+            bottom: -15px; 
+            right: 50%;
+            transform: translateX(50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid var(--orange-accent); 
+        }
+        .inspirational-quote p {
+            margin: 0 0 10px 0;
+            color: var(--orange-accent); 
+            font-weight: bold;
+            /* Reset left border for quote paragraph */
+            border-left: none; 
+            padding-left: 0;
+        }
+        .inspirational-quote p:hover {
+            border-left-color: none;
+        }
+        .inspirational-quote strong {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: var(--orange-accent); 
+            font-weight: 700;
+        }
+
+        /* --- HORIZONTAL RULE (HR) --- */
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--primary-accent), rgba(0, 0, 0, 0));
+            margin: 60px 0;
+        }
+        
+        /* Course Item List Style (Electric Blue) */
+        .course-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .course-list li {
+            margin-bottom: 15px;
+            line-height: 1.4;
+            /* ADDED LEFT BORDER ACCENT */
+            padding: 5px 0 5px 15px;
+            border-left: 2px solid rgba(0, 169, 255, 0.2); 
+            transition: border-left-color 0.3s;
+        }
+        .course-list li:hover {
+            border-left-color: var(--primary-accent);
+        }
+        .course-title {
+            display: block;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+        .course-list a {
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 5px;
+            transition: color 0.3s;
+        }
+        .course-list a:hover {
+            color: var(--blue-secondary-accent);
+            text-decoration: underline;
+        }
+        
+        /* --- SKILL LIST ICONS (GREEN) --- */
+        .skill-list i {
+            color: var(--contact-green);
+            margin-right: 5px;
+        }
+        
+        /* --- EDUCATION & EXPERIENCE --- */
+        .time-period {
+            font-size: 0.85em;
+            color: var(--primary-accent); 
+            font-weight: 700;
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .role-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: var(--text-light);
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .institution-name {
+            font-size: 0.9em;
+            color: var(--blue-secondary-accent);
+            display: block;
+            margin-top: 5px;
+        }
+        
+        .description-list {
+            list-style: disc;
+            padding-left: 25px;
+            margin-top: 10px;
+        }
+        
+        .description-list li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            /* Remove the left border accent for the description list items */
+            border-left: none; 
+            padding-left: 0;
+        }
+        
+        /* --- PROJECT SECTION --- */
+        .project-link {
+            margin-bottom: 25px;
+            padding: 10px;
+            border-left: 3px solid var(--primary-accent);
+            background-color: rgba(0, 169, 255, 0.05);
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .project-link:hover {
+            background-color: rgba(0, 169, 255, 0.1);
+        }
+        .project-link h3 {
+            margin-top: 0;
+            color: var(--text-light);
+            font-size: 1.1em;
+            border-bottom: 1px dotted rgba(0, 169, 255, 0.3);
+            padding-bottom: 5px;
+        }
+        .project-link p {
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .project-link a {
+            color: var(--primary-accent);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .project-link a:hover {
+            color: var(--blue-secondary-accent);
+            text-decoration: underline;
+        }
+        .project-link i {
+            margin-left: 5px;
+        }
+        
+        /* --- HIRE ME FORM --- */
+        .hire-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .hire-form label {
+            font-weight: bold;
+            color: var(--primary-accent);
+            margin-top: 5px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .hire-form input[type="email"],
+        .hire-form input[type="text"],
+        .hire-form textarea {
+            padding: 10px;
+            border: 1px solid var(--blue-secondary-accent);
+            border-radius: 4px;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            font-family: var(--font-primary);
+            box-shadow: 0 0 5px rgba(0, 169, 255, 0.2);
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .hire-form input:focus,
+        .hire-form textarea:focus {
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 10px rgba(0, 169, 255, 0.5);
+            outline: none;
+        }
+
+        .hire-form textarea {
+            resize: vertical;
+        }
+
+        .hire-form button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: var(--primary-accent);
+            color: var(--background-dark);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s, box-shadow 0.3s, transform 0.1s;
+        }
+
+        .hire-form button[type="submit"]:hover {
+            background-color: #0088cc;
+            box-shadow: 0 0 20px var(--primary-accent);
+            transform: translateY(-2px);
+        }
+
+        /* --- CONTACT LOGO SECTION (GREEN GLOW) --- */
+        .contact-logo {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            text-align: center;
+            margin: 15px 10px;
+            position: relative;
+        }
+
+        .contact-item a {
+            font-size: 2.5em;
+            color: var(--contact-green);
+            text-decoration: none;
+            transition: transform 0.3s, text-shadow 0.3s;
+            display: block;
+        }
+
+        .contact-item a:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 15px var(--contact-green), 0 0 30px rgba(57, 255, 20, 0.6);
+        }
+
+        .contact-item a i {
+            /* Reset the margin for the icon inside the contact item */
+            margin-right: 0; 
+            /* Remove pulsing animation from contact icons */
+            animation: none !important; 
+        }
+
+        /* Tooltip-like label for contact items */
+        .logo-label {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: var(--contact-green);
+            padding: 5px 10px;
+            border-radius: 3px;
+            white-space: nowrap;
+            font-size: 0.8em;
+            font-weight: bold;
+            border: 1px solid var(--contact-green);
+            visibility: hidden;
+            opacity: 0;
+            transition: bottom 0.3s, opacity 0.3s;
+            z-index: 10;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
+        }
+        /* Mobile number specific text label (for smaller screens) */
+        .logo-label-text {
+             display: none;
+        }
+
+        .contact-item a:hover + .logo-label,
+        .contact-item a:focus + .logo-label {
+            visibility: visible;
+            bottom: -40px;
+            opacity: 1;
+        }
+
+        /* Ensure mobile number is not hidden on large screens but label is visible */
+        .mobile-hidden {
+            display: block; 
+        }
+
+        /* Specific style to hide the standard logo label when we use the specific text label (on mobile) */
+        .mobile-hidden .logo-label {
+            visibility: hidden;
+            height: 0;
+            opacity: 0;
+            /* Ensure the text label is not hidden on large screen (for desktop visibility) */
+            display: none; 
+        }
+        
+        /* NEW STYLE FOR DOWNLOAD BUTTON (Used in the new Resume section) */
+        .download-button {
+            display: block;
+            width: 80%; /* Takes up most of the width */
+            max-width: 400px;
+            margin: 20px auto 30px; /* Centered, added margin */
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            background-color: var(--primary-accent);
+            color: var(--background-dark);
+            border: 2px solid var(--primary-accent);
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 169, 255, 0.5);
+        }
+
+        .download-button i {
+            margin-right: 10px;
+        }
+
+        .download-button:hover {
+            background-color: var(--container-bg); /* Dark background on hover */
+            color: var(--primary-accent);
+            box-shadow: 0 0 25px var(--primary-accent);
+            transform: scale(1.05);
+        }
+        
+        /* NEW STYLE for the Copyright Footer */
+        .copyright-footer {
+            text-align: center;
+            font-size: 0.75em;
+            padding: 30px 0 10px 0; /* Top padding to separate from last section, bottom padding */
+            color: var(--primary-accent); /* Use electric blue color */
+            opacity: 0.7; /* Make it subtle */
+            /* Add a very subtle text shadow/glow */
+            text-shadow: 0 0 5px rgba(0, 169, 255, 0.3);
+            font-weight: 700;
+        }
+
+
+        /* --- RESPONSIVENESS (MOBILE) --- */
+        @media screen and (max-width: 768px) {
+            .main-container {
+                max-width: 100%;
+                padding: 10px;
+                margin: 10px auto;
+            }
+
+            /* H1 FONT SIZE */
+            h1 {
+                font-size: 2.0em;
+            }
+            .name-box-container {
+                /* Reduced vertical padding on mobile */
+                padding: 3px 10px; 
+            }
+
+            h2 {
+                text-align: center;
+            }
+            
+            /* Separator is 100% full width */
+            .name-separator {
+                width: 100%;
+            }
+
+            .inspirational-quote {
+                font-size: 0.95em;
+                max-width: 95%;
+            }
+
+            .section-content-box {
+                padding: 15px;
+                margin-bottom: 30px;
+            }
+
+            /* Hamburger icon container on mobile */
+            .top-nav {
+                left: 5px; /* Adjust to stay inside smaller container padding */
+                top: 250px; /* Mobile adjustment to be near the profile pic area */
+                width: 80%;
+            }
+            
+            .nav-toggle {
+                padding: 5px;
+            }
+
+            .top-nav {
+                margin-top: 10px;
+                margin-bottom: 0;
+                text-align: left;
+            }
+
+            /* Mobile menu list overrides */
+            .top-nav ul.open {
+                left: 0; /* Align with nav-toggle */
+                width: 100%; 
+                top: 100%; /* Keep below toggle */
+            }
+
+            .top-nav li {
+                width: 95%;
+            }
+            
+            .download-button {
+                width: 95%;
+            }
+            
+            /* Hiding the default mobile number label/tooltip on mobile */
+            .mobile-hidden .logo-label {
+                visibility: hidden;
+                height: 0;
+                opacity: 0;
+            }
+            
+            /* Showing the dedicated text label for mobile number on mobile */
+            .mobile-hidden .logo-label-text {
+                display: block;
+                visibility: visible;
+                height: auto;
+                opacity: 1;
+                font-size: 0.8em;
+                color: var(--contact-green);
+                margin-top: 5px;
+            }
+
+            /* Mobile number icon alignment fix */
+            .contact-item {
+                margin: 15px 5px;
+            }
+            .contact-item a {
+                font-size: 2.0em;
+            }
+            
+            /* About Me alignment fix for typing text */
+            h2#about {
+                /* CHANGE 2: ALIGN TO THE LEFT on mobile too */
+                justify-content: flex-start;
+            }
+            
+            /* Smaller padding for copyright on mobile */
+            .copyright-footer {
+                padding: 20px 0 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-bg"></div>
+    <div class="main-container">
+        
+        <nav class="top-nav">
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul id="navList">
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#hire-me">Hire Me</a></li>
+                <li><a href="#resume">Resume</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <div class="name-box-container">
+            <h1>DIPANSHU MUKHERJEE</h1>
+        </div>
+        
+        <h2>Portfolio</h2>
+        
+        <blockquote class="inspirational-quote scroll-fade-item">
+            <p>"HARD WORK BEATS TALENT WHEN TALENT FAILS TO WORK HARD"</p>
+            <strong>- Kevin Durant</strong>
+        </blockquote>
+        
+        <hr>
+
+        <div class="profile-image-container scroll-fade-item">
+            <img src="profile.jpg" alt="Dipanshu Mukherjee Profile Picture" class="profile-image">
+        </div>
+        
+        <h2 id="about" class="scroll-fade-item">
+            <div class="typing-container">
+                <i class="fas fa-user-circle about-logo-anim"></i>
+                <span class="typing-text">About Me</span>
+            </div>
+        </h2>
+        <div class="section-content-box scroll-fade-item">
+            <p>
+                I am a highly motivated person with a history of positive and satisfying results with solid foundation of understanding of various market dynamics gained with the expertise in data handling, customer BPO, Web Development and java. My past work with my previous work places and their positive response demonstrates my capability for rapid problem solving and understanding, as well as the ability to pivot quickly and bring significant and immediate value to any team structure. With great time management and analytical skills, I excel at quickly assessing complex cross-functional challenges and designing effective, I have a good knowledge in technical skills of SQL, Python, Java, and Web Development, I am a punctual person with time management and tackling issues with determination.
+            </p>
+        </div>
+        
+        <hr>
+
+        <h2 id="courses" class="scroll-fade-item"><i class="fas fa-graduation-cap"></i> Courses Completed (Certified)</h2>
+        <div class="section-content-box scroll-fade-item">
+            <ul class="course-list">
+                <li>
+                    <span class="course-title">Google Advanced Data Analytics</span>
+                    <a href="https://coursera.org/share/d402bbf6635ecbc6ae2cbd36f11b71dd" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li>
+                    <span class="course-title">Google Digital Marketing E-commerce</span>
+                    <a href="https://coursera.org/share/dc731343174a61d6a14fbbcf47252391" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li>
+                    <span class="course-title">Google Data Analytics</span>
+                    <a href="https://coursera.org/share/093e7c65b590057a8e4abc4aaa35ea5b" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li>
+                    <span class="course-title">Azure Synapse SQL Pool implement Polybase</span>
+                    <a href="https://coursera.org/share/086f317f88e8361e17046ebd08340a4d" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li>
+                    <span class="course-title">Crash Course on Python</span>
+                    <a href="https://coursera.org/share/dea37e2f664790e4fbdaf50464d6a3bf" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li>
+                    <span class="course-title">Exploratory Data Analysis for Machine Learning</span>
+                    <a href="https://coursera.org/share/c0a5357ed78ab07fd60ab1100239474e" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li>
+                    <span class="course-title">Google IT Support</span>
+                    <a href="https://coursera.org/share/d73bebc46fbfd0b39c35256465381995" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li>
+                    <span class="course-title">Google Cybersecurity</span>
+                    <a href="https://coursera.org/share/49952d5da97f989f351738223de0d6bc" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+                <li>
+                    <span class="course-title">Core Java</span>
+                    <a href="https://coursera.org/share/2ae818880621a6008ac84f92ee1adcb9" target="_blank">View Certification <i class="fas fa-external-link-alt"></i></a>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <h2 id="skills" class="scroll-fade-item"><i class="fas fa-code"></i> Skills & Technologies</h2>
+        <div class="section-content-box scroll-fade-item">
+            <div id="skill-list">
+                <span class="skill-category">Data Science & Backend</span>
+                <span class="skill-tag" style="animation-delay: 0.0s;">Data Analysis</span>
+                <span class="skill-tag" style="animation-delay: 0.05s;">SQL (Certified)</span>
+                <span class="skill-tag" style="animation-delay: 0.1s;">Python (Pandas, NumPy, Scikit-learn)</span>
+                <span class="skill-tag" style="animation-delay: 0.15s;">Machine Learning</span>
+                <span class="skill-tag" style="animation-delay: 0.2s;">Data Visualization (Tableau/Power BI)</span>
+                <span class="skill-tag" style="animation-delay: 0.25s;">Java</span>
+                <span class="skill-tag" style="animation-delay: 0.3s;">Blockchain</span>
+                
+                <span class="skill-category">Web Development</span>
+                <span class="skill-tag" style="animation-delay: 0.35s;">HTML5 & CSS3</span>
+                <span class="skill-tag" style="animation-delay: 0.4s;">JavaScript</span>
+                <span class="skill-tag" style="animation-delay: 0.45s;">Canva (Web Design)</span>
+                
+                <span class="skill-category">Professional & Other</span>
+                <span class="skill-tag" style="animation-delay: 0.5s;">Customer Service</span>
+                <span class="skill-tag" style="animation-delay: 0.55s;">CRM</span>
+                <span class="skill-tag" style="animation-delay: 0.6s;">Data Entry</span>
+                <span class="skill-tag" style="animation-delay: 0.65s;">Time Management</span>
+                <span class="skill-tag" style="animation-delay: 0.7s;">Research</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 id="education" class="scroll-fade-item"><i class="fas fa-user-graduate"></i> Education</h2>
+        <div class="section-content-box scroll-fade-item">
+            <div class="education-item">
+                <span class="role-title">B.Tech (Artificial Intelligence and Machine Learning)</span>
+                <span class="institution-name">Woxsen University, Hyderabad</span>
+                <span class="time-period">Year of Passing: 2027</span>
+            </div>
+            <div class="education-item">
+                <span class="role-title">Class XII</span>
+                <span class="institution-name">Medium: English</span>
+                <span class="time-period">Year of Passing: 2021</span>
+            </div>
+            <div class="education-item">
+                <span class="role-title">Class X (Matriculation)</span>
+                <span class="institution-name">CBSE Board | Medium: English</span>
+                <span class="time-period">Year of Passing: 2020 | Percentage: 74%</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 id="experience" class="scroll-fade-item"><i class="fas fa-briefcase"></i> Experience & Internships</h2>
+        <div class="section-content-box scroll-fade-item">
+            
+            <div class="experience-item">
+                <span class="role-title">Software Developer Intern / Customer Support Executive Assistant</span>
+                <span class="institution-name">The Moe India Pvt Ltd</span>
+                <span class="time-period">January 2024 - March 2024</span>
+                <ul class="description-list">
+                    <li>Worked as a Software Developer and also assisted in the Customer Support Executive role.</li>
+                </ul>
+            </div>
+            
+            <div class="experience-item">
+                <span class="role-title">Campus Ambassador</span>
+                <span class="institution-name">Wingfotech LTD</span>
+                <span class="time-period">April 2023 - January 2024</span>
+                <ul class="description-list">
+                    <li>Oversaw and planned a variety of events, marketing initiatives, and student involvement projects.</li>
+                    <li>Effectively promoted the brand on campus while honing leadership, coordination, and communication abilities.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h2 id="projects" class="scroll-fade-item"><i class="fas fa-tools"></i> Projects</h2>
+        <div class="section-content-box scroll-fade-item">
+            <div class="project-link">
+                <h3>Project 1: Jivasattvam Scan Analyzer</h3>
+                <p>The Jivasattvam Scan Analyzer is a remote health screening tool designed for non-invasive deficiency detection. It uses spectral analysis of an uploaded hand image to quickly identify specific vitamin and nutrient deficiencies, providing immediate, actionable home remedies and guidance.</p>
+                <p><a href="https://dipanshu2424.github.io/Jivasattvam-Scan/" target="_blank">View Project <i class="fas fa-external-link-alt"></i></a></p>
+            </div>
+            <div class="project-link">
+                <h3>Project 2: Medical Voice Assistant</h3>
+                <p>Developed an AI-powered voice assistant designed to provide users with initial home treatment steps and information for common ailments. This project involves natural language processing (NLP) and speech recognition. </p>
+                <p style="color: var(--orange-accent); font-weight: bold;"><i class="fas fa-hammer"></i> Status: Work in Progress</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <h2 id="hire-me" class="scroll-fade-item"><i class="fas fa-handshake"></i> Hire Me / Collaborate</h2>
+        <div class="section-content-box scroll-fade-item">
+            <p>Please fill out your details to collaborate with me or for Hiring process</p>
+            <form id="hireForm" class="hire-form">
+                <label for="email">Your Email ID:</label>
+                <input type="email" id="email" name="email" placeholder="example@company.com" required>
+
+                <label for="position">Position / Role of Interest:</label>
+                <input type="text" id="position" name="position" placeholder="e.g., Data Analyst Intern, Technical Assistant">
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" placeholder="Briefly describe your proposal or inquiry."></textarea>
+
+                <button type="submit">SUBMIT INQUIRY</button>
+            </form>
+        </div>
+        <hr>
+
+        <h2 id="resume" class="scroll-fade-item"><i class="fas fa-file-alt"></i> My Resume</h2>
+        <div class="section-content-box scroll-fade-item">
+            <a href="DIPANSHU.pdf" download="Dipanshu_Mukherjee_Resume.pdf" class="download-button">
+                <i class="fas fa-file-download"></i> Download Resume (PDF)
+            </a>
+            </div>
+        <hr>
+
+        <h2 id="contact" class="scroll-fade-item"><i class="fas fa-paper-plane"></i> Contact Me</h2>
+        <div class="section-content-box scroll-fade-item">
+            <div class="contact-logo">
+                <div class="contact-item">
+                    <a href="mailto:mukherjeedipanshu@gmail.com" title="Email: mukherjeedipanshu@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <span class="logo-label">Email</span>
+                </div>
+                <div class="contact-item mobile-hidden">
+                    <a href="tel:9703750707" title="Click to call"><i class="fas fa-mobile-alt"></i></a>
+                    <span class="logo-label">9703750707</span>
+                    <span class="logo-label-text">Mobile</span>
+                </div>
+                <div class="contact-item">
+                    <a href="https://linkedin.com/in/dipanshumukherjee" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <span class="logo-label">LinkedIn</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright-footer">© 2025 All rights reserved by Dipanshu Mukherjee</div>
+        
+    </div>
+
+    <script>
+        // Function to handle the form submission for the hire me section
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Stop the default form submission
+            
+            // Get form values
+            const email = document.getElementById('email').value;
+            const position = document.getElementById('position').value || "General Inquiry";
+            const message = document.getElementById('message').value;
+
+            // Simple check
+            if (!email || !message) {
+                alert("Please fill in your Email ID and Message.");
+                return;
+            }
+
+            // Construct the mailto link
+            const subject = encodeURIComponent(`Inquiry from Portfolio - ${position}`);
+            const body = encodeURIComponent(`Email: ${email}\nPosition/Role: ${position}\n\nMessage:\n${message}\n\n`);
+            
+            const mailtoLink = `mailto:mukherjeedipanshu@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Open the user's email client
+            window.location.href = mailtoLink;
+        }
+
+        // Function to apply staggered animation to skill tags
+        function staggerSkills() {
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach((tag, index) => {
+                if (!tag.style.animationDelay) {
+                    // Apply a staggered delay based on the index (50ms delay per tag)
+                    tag.style.animationDelay = `${index * 0.05}s`;
+                }
+            });
+        }
+
+        // Function for Scroll Animation
+        function setupScrollAnimation() {
+            // Select all elements that should fade in on scroll
+            const faders = document.querySelectorAll(".scroll-fade-item");
+            
+            const appearOptions = {
+                threshold: 0, 
+                // Start the animation when the element is 100px from the bottom of the viewport
+                rootMargin: "0px 0px -100px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(
+                entries, 
+                appearOnScroll 
+            ) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return; // Not in view yet
+                    } else {
+                        // In view, add the class to start the transition
+                        entry.target.classList.add("scrolled-in");
+                        // Stop observing once the animation has been triggered
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+        }
+        
+        // Function to stop the blinking cursor on H1 after typing is complete
+        function stopH1Cursor() {
+            const h1 = document.querySelector('h1');
+            if (h1) {
+                // The typing animation is 6s. We add a small delay (e.g., 6.1s) to ensure it's complete.
+                const totalAnimationDuration = 6000; // 6 seconds in ms
+                setTimeout(() => {
+                    // Add a class that removes the cursor border
+                    h1.classList.add('cursor-off');
+                }, totalAnimationDuration + 100); // 100ms buffer
+            }
+        }
+        
+        // Hamburger Menu Toggle Function (Now universal for all screen sizes)
+        function toggleMenu() {
+            const navList = document.getElementById('navList');
+            navList.classList.toggle('open');
+        }
+
+        // Attach event listener after the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // FIXED: Added this line to force the scroll position to the top on page load, preventing the "projects" section from being the default view on refresh.
+            window.scrollTo(0, 0);
+
+            const form = document.getElementById('hireForm');
+            if (form) {
+                form.addEventListener('submit', handleFormSubmit);
+            }
+
+            // Event listener for hamburger toggle
+            const navToggle = document.getElementById('navToggle');
+            if (navToggle) {
+                navToggle.addEventListener('click', toggleMenu);
+            }
+            
+            const navList = document.getElementById('navList');
+            const navLinks = navList.querySelectorAll('a');
+            
+            // Close menu when a link is clicked (UX improvement)
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    navList.classList.remove('open');
+                    
+                    // Smooth scroll manually after the menu closes
+                    event.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Initialize function to stop H1 cursor after typing
+            stopH1Cursor();
+
+            // Initialize skill stagger animation
+            staggerSkills();
+
+            // Initialize scroll animation
+            setupScrollAnimation();
+        });
+    </script>
+</body>
+</html>
