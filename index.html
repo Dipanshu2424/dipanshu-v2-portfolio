@@ -1350,6 +1350,9 @@
         // Attach event listener after the page loads
         document.addEventListener('DOMContentLoaded', () => {
             
+            // FIX: Forces the page to scroll to the very top (0, 0) on load.
+            window.scrollTo(0, 0); 
+
             // REMOVED: window.scrollTo(0, 0); to prevent the autoscrolling/jump on page load.
 
             const form = document.getElementById('hireForm');
