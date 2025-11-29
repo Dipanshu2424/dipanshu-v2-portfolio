@@ -1135,13 +1135,13 @@
                 <span class="skill-category"><i class="fas fa-shield-alt"></i> Professional & Marketing</span>
                 <span class="skill-tag" style="animation-delay: 0.85s;">Cybersecurity (Threat Modeling, IAM)</span>
                 <span class="skill-tag" style="animation-delay: 0.9s;">Digital Marketing (Certified, SEO/SEM - Google Ads/PPC, Content Strategy)</span>
-                <span class="skill-tag" style="animation-delay: 0.95s;">Research</span>
+                <span class="skill-tag" style="animation-delay: 0.95s;">Research (User Research / Usability Testing)</span>
                 <span class="skill-tag" style="animation-delay: 1.0s;">CRM (Customer Relationship Management)</span>
-                <span class="skill-tag" style="animation-delay: 1.05s;">Time Management</span>
+                <span class="skill-tag" style="animation-delay: 1.05s;">Time Management / Prioritization</span>
                 <span class="skill-tag" style="animation-delay: 1.1s;">Data Entry / Data Quality</span>
-                <span class="skill-tag" style="animation-delay: 1.15s;">Canva (Web Design)</span>
-                <span class="skill-tag" style="animation-delay: 1.2s;">Customer Service</span>
-                <span class="skill-tag" style="animation-delay: 1.22s;">Planning</span>
+                <span class="skill-tag" style="animation-delay: 1.15s;">Canva (Web Design / Visual Content Creation)</span>
+                <span class="skill-tag" style="animation-delay: 1.2s;">Customer Service /</span>
+                <span class="skill-tag" style="animation-delay: 1.22s;">Planning/</span>
                 </div>
         </div>
 
@@ -1351,10 +1351,16 @@
             navList.classList.toggle('open');
         }
 
-        // Attach event listener after the page loads
+        // --- CORE FIX: Attach event listener after the page loads ---
         document.addEventListener('DOMContentLoaded', () => {
             
-            // FIX LAYER 2: Explicitly set scroll position to top-left corner on DOMContentLoaded
+            // FIX LAYER 1A (NEW): Immediately remove any URL fragment (#section) to stop browser-default scrolling
+            if (window.location.hash) {
+                // Use history.replaceState to modify the URL without causing a page reload
+                history.replaceState(null, null, window.location.pathname + window.location.search);
+            }
+
+            // FIX LAYER 1B: Explicitly set scroll position to top-left corner on DOMContentLoaded
             window.scrollTo(0, 0); 
 
             const form = document.getElementById('hireForm');
@@ -1371,7 +1377,7 @@
             const navList = document.getElementById('navList');
             const navLinks = navList.querySelectorAll('a');
             
-            // Close menu when a link is clicked (UX improvement)
+            // Close menu and scroll on link click
             navLinks.forEach(link => {
                 link.addEventListener('click', (event) => {
                     navList.classList.remove('open');
@@ -1393,11 +1399,17 @@
             setupScrollAnimation();
         });
 
-        // CORE FIX LAYER 3 (The most aggressive scroll fix):
-        // Ensure scroll to top after ALL resources (like images, which could cause a final jump) 
-        // have loaded. This runs after DOMContentLoaded.
+        // FIX LAYER 2: Ensure scroll to top after all heavy elements (like images) have loaded.
         window.addEventListener('load', () => {
             window.scrollTo(0, 0);
+        });
+        
+        // FIX LAYER 3 (The Nuclear Option): Run a scroll command a tiny bit later 
+        // to override any final rendering or focus events.
+        window.addEventListener('load', () => {
+             setTimeout(() => {
+                window.scrollTo(0, 0);
+             }, 10); // Runs 10 milliseconds after everything loads
         });
     </script>
 </body>
